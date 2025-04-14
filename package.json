@@ -26,6 +26,7 @@
   "dependencies": {
     "@rsbuild/plugin-react": "^1.2.0",
     "@rslib/core": "^0.6.2",
+    "@rsbuild/plugin-svgr": "^1.2.0",
     "typescript": "^5.8.3",
     "@types/node": "~22.14.1"
   }
