@@ -1,6 +1,6 @@
 {
   "name": "@carefrees/rslib",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "description": "",
   "author": "SunLxy <1011771396@qq.com>",
   "license": "MIT",
@@ -8,7 +8,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "lib",
+    "dist",
     "src",
     "bin",
     "tsconfig.json"
