@@ -27,7 +27,7 @@ jobs:
 
     - name: Create Tag
       id: create_tag
-      uses: jaywcjlove/create-tag-action@v1.3.15
+      uses: jaywcjlove/create-tag-action@main
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         package-path: ./package.json
@@ -35,7 +35,7 @@ jobs:
     - name: Generate changelog
       id: changelog
       uses: jaywcjlove/changelog-generator@v1.5.7
-      if: steps.create_tag.outputs.successful
+      if: steps.create_tag.outputs.successful == 'true'
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         head-ref: ${{steps.create_tag.outputs.version}}
@@ -44,14 +44,14 @@ jobs:
 
     - name: Create Release
       uses: ncipollo/release-action@v1
-      if: steps.create_tag.outputs.successful
+      if: steps.create_tag.outputs.successful == 'true'
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         name: ${{ steps.create_tag.outputs.version }}
         tag: ${{ steps.create_tag.outputs.version }}
         body: |
           ```bash
-          npm i @carefrees/knp@${{steps.create_tag.outputs.version}}
+          npm i @carefrees/rslib@${{steps.create_tag.outputs.version}}
           ```
           ${{ steps.changelog.outputs.compareurl }}
           ${{ steps.changelog.outputs.changelog }}
