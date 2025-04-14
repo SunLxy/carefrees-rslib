@@ -10,7 +10,8 @@
   "files": [
     "dist",
     "src",
-    "bin"
+    "bin",
+    "tsconfig.base.json"
   ],
   "bin": {
     "carefrees-rslib": "./bin/rslib"
@@ -23,7 +24,6 @@
     "watch": "rslib build --watch"
   },
   "dependencies": {
-    "commander": "^13.1.0",
     "@rsbuild/plugin-react": "^1.2.0",
     "@rslib/core": "^0.6.2",
     "typescript": "^5.8.3",
