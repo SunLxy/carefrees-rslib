@@ -1,6 +1,6 @@
 {
   "name": "@carefrees/rslib",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "author": "SunLxy <1011771396@qq.com>",
   "license": "MIT",
@@ -10,8 +10,7 @@
   "files": [
     "dist",
     "src",
-    "bin",
-    "tsconfig.json"
+    "bin"
   ],
   "bin": {
     "carefrees-rslib": "./bin/rslib"
