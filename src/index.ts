@@ -1,2 +1,2 @@
-export * from "./cli/commands"
-export * from "./cli/init"
+export * from "@rslib/core"
+export { initProcessConfig } from "./init.js"

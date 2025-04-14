@@ -29,11 +29,10 @@
     "baseUrl": "./",
     "rootDir": "src",
     "declaration": true,
-    "declarationDir": "./dist-types",
     "isolatedDeclarations": true,
     "composite": true,
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
   },
   "include": [
     "src",
