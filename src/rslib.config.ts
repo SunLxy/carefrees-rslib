@@ -1,49 +1,50 @@
 import { pluginReact } from '@rsbuild/plugin-react';
 import { pluginSvgr } from '@rsbuild/plugin-svgr';
 import { defineConfig, RslibConfig } from '@rslib/core';
-export default defineConfig({
-  source: {
-    entry: {
-      index: ['./src/**', '!src/**/*.md'],
-    },
-  },
-  lib: [
-    {
-      bundle: false,
-      dts: true,
-      format: 'esm',
-      output: {
-        filename: {
-          js: '[name].js',
-        },
-        distPath: {
-          root: './esm',
-        },
+export default defineConfig(() => {
+  const isNode = process.env.CAREFREE_RSLIB_TARGET === 'node'
+  return {
+    source: {
+      entry: {
+        index: ['./src/**', '!src/**/*.md'],
       },
     },
-    {
-      bundle: false,
-      dts: true,
-      format: 'cjs',
-      output: {
-        filename: {
-          js: '[name].js',
-        },
-        distPath: {
-          root: './lib',
+    lib: [
+      {
+        bundle: false,
+        dts: true,
+        format: 'esm',
+        output: {
+          filename: {
+            js: '[name].js',
+          },
+          distPath: {
+            root: './esm',
+          },
         },
       },
+      {
+        bundle: false,
+        dts: true,
+        format: 'cjs',
+        output: {
+          filename: {
+            js: '[name].js',
+          },
+          distPath: {
+            root: './lib',
+          },
+        },
+      },
+    ],
+    output: {
+      target: isNode ? "node" : 'web',
     },
-  ],
-  output: {
-    target: 'web',
-  },
-  plugins: [
-    pluginReact(),
-    pluginSvgr({
-      mixedImport: true,
-      svgrOptions: {
-        exportType: 'named',
-      },
-    })],
-}) as RslibConfig;
+    plugins: isNode ? [] : [
+      pluginReact(),
+      pluginSvgr({
+        mixedImport: true,
+        svgrOptions: { exportType: 'named', },
+      })],
+  } as RslibConfig;
+});
