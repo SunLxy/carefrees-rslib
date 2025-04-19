@@ -5,15 +5,17 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export const initProcessConfig = (): void => {
-  const isConfig = process.argv.find((item) => item.includes('--config') || item.includes('-c'))
-  const isNode = process.argv.find((item) => item.includes('--node'))
-  if (!isConfig) {
-    process.argv.push('--config', path.resolve(__dirname, "rslib.config.js"))
-  }
-  if (isNode) {
+  const nodeIndex = process.argv.findIndex((item) => item.includes('--node'))
+  if (nodeIndex >= 0) {
+    process.argv.splice(nodeIndex, 1)
     process.env.CAREFREE_RSLIB_TARGET = 'node'
   } else {
     process.env.CAREFREE_RSLIB_TARGET = 'web'
+  }
+
+  const isConfig = process.argv.find((item) => item.includes('--config') || item.includes('-c'))
+  if (!isConfig) {
+    process.argv.push('--config', path.resolve(__dirname, "rslib.config.js"))
   }
 
 }
