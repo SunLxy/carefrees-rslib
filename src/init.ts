@@ -13,6 +13,14 @@ export const initProcessConfig = (): void => {
     process.env.CAREFREE_RSLIB_TARGET = 'web'
   }
 
+  const esmIndex = process.argv.findIndex((item) => item.includes('--esm'))
+  if (esmIndex >= 0) {
+    process.argv.splice(esmIndex, 1)
+    process.env.CAREFREE_RSLIB_ESM = 'true'
+  } else {
+    process.env.CAREFREE_RSLIB_ESM = 'false'
+  }
+
   const isConfig = process.argv.find((item) => item.includes('--config') || item.includes('-c'))
   if (!isConfig) {
     process.argv.push('--config', path.resolve(__dirname, "rslib.config.js"))

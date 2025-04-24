@@ -3,6 +3,8 @@ import { pluginSvgr } from '@rsbuild/plugin-svgr';
 import { defineConfig, RslibConfig } from '@rslib/core';
 export default defineConfig(() => {
   const isNode = process.env.CAREFREE_RSLIB_TARGET === 'node'
+  const isOnlyESM = process.env.CAREFREE_RSLIB_ESM === 'true'
+
   return {
     source: {
       entry: {
@@ -23,7 +25,7 @@ export default defineConfig(() => {
           },
         },
       },
-      {
+      isOnlyESM ? undefined : {
         bundle: false,
         dts: true,
         format: 'cjs',
@@ -36,7 +38,7 @@ export default defineConfig(() => {
           },
         },
       },
-    ],
+    ].filter(Boolean),
     output: {
       target: isNode ? "node" : 'web',
     },
