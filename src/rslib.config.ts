@@ -2,8 +2,7 @@ import { pluginReact } from '@rsbuild/plugin-react';
 import { pluginSvgr } from '@rsbuild/plugin-svgr';
 import { defineConfig, RslibConfig } from '@rslib/core';
 import { pluginUnpluginVue } from 'rsbuild-plugin-unplugin-vue';
-import { pluginVueTs } from "./plugins/vue-ts"
-
+import { pluginVueTsc } from "./plugins/vue-tsc"
 
 export default defineConfig(() => {
   const isNode = process.env.CAREFREE_RSLIB_TARGET === 'node'
@@ -18,7 +17,7 @@ export default defineConfig(() => {
   if (isVue) {
     plugins = [
       pluginUnpluginVue({}),
-      pluginVueTs()
+      pluginVueTsc()
     ]
   }
   return {
@@ -30,7 +29,7 @@ export default defineConfig(() => {
     lib: [
       {
         bundle: false,
-        dts: true,
+        dts: isVue ? false : true,
         format: 'esm',
         output: {
           filename: {
@@ -43,7 +42,7 @@ export default defineConfig(() => {
       },
       isOnlyESM ? undefined : {
         bundle: false,
-        dts: true,
+        dts: isVue ? false : true,
         format: 'cjs',
         output: {
           filename: {
