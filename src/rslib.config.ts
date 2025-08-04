@@ -1,61 +1,68 @@
-import { pluginReact } from '@rsbuild/plugin-react';
-import { pluginSvgr } from '@rsbuild/plugin-svgr';
-import { defineConfig, RslibConfig } from '@rslib/core';
-import { pluginUnpluginVue } from 'rsbuild-plugin-unplugin-vue';
-import { pluginVueTsc } from "./plugins/vue-tsc"
+import { pluginReact } from "@rsbuild/plugin-react";
+import { pluginSvgr } from "@rsbuild/plugin-svgr";
+import { defineConfig, RslibConfig } from "@rslib/core";
+import { pluginUnpluginVue } from "rsbuild-plugin-unplugin-vue";
+import { pluginVueTsc } from "./plugins/vue-tsc";
+import { pluginSass } from "@rsbuild/plugin-sass";
 
 export default defineConfig(() => {
-  const isNode = process.env.CAREFREE_RSLIB_TARGET === 'node'
-  const isOnlyESM = process.env.CAREFREE_RSLIB_ESM === 'true'
-  const isVue = process.env.CAREFREE_RSLIB_VUE === 'true'
-  let plugins = isNode ? [] : [
-    pluginReact(),
-    pluginSvgr({
-      mixedImport: true,
-      svgrOptions: { exportType: 'named', },
-    })]
+  const isNode = process.env.CAREFREE_RSLIB_TARGET === "node";
+  const isOnlyESM = process.env.CAREFREE_RSLIB_ESM === "true";
+  const isVue = process.env.CAREFREE_RSLIB_VUE === "true";
+  const isSass = process.env.CAREFREE_RSLIB_SASS === "true";
+  let plugins = isNode
+    ? []
+    : [
+        pluginReact(),
+        pluginSvgr({
+          mixedImport: true,
+          svgrOptions: { exportType: "named" },
+        }),
+      ];
   if (isVue) {
-    plugins = [
-      pluginUnpluginVue({}),
-      pluginVueTsc()
-    ]
+    plugins = [pluginUnpluginVue({}), pluginVueTsc()];
+  }
+  if (isSass) {
+    plugins.push(pluginSass());
   }
   return {
     source: {
       entry: {
-        index: ['./src/**', '!src/**/*.md'],
+        index: ["./src/**", "!src/**/*.md"],
       },
     },
     lib: [
       {
         bundle: false,
         dts: isVue ? false : true,
-        format: 'esm',
+        format: "esm",
         output: {
           filename: {
-            js: '[name].js',
+            js: "[name].js",
           },
           distPath: {
-            root: './esm',
+            root: "./esm",
           },
         },
       },
-      isOnlyESM ? undefined : {
-        bundle: false,
-        dts: isVue ? false : true,
-        format: 'cjs',
-        output: {
-          filename: {
-            js: '[name].js',
+      isOnlyESM
+        ? undefined
+        : {
+            bundle: false,
+            dts: isVue ? false : true,
+            format: "cjs",
+            output: {
+              filename: {
+                js: "[name].js",
+              },
+              distPath: {
+                root: "./lib",
+              },
+            },
           },
-          distPath: {
-            root: './lib',
-          },
-        },
-      },
     ].filter(Boolean),
     output: {
-      target: isNode ? "node" : 'web',
+      target: isNode ? "node" : "web",
     },
     plugins,
   } as RslibConfig;
