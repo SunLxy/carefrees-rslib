@@ -55,6 +55,9 @@ jobs:
             ${{ steps.changelog.outputs.compareurl }}
             ${{ steps.changelog.outputs.changelog }}
 
+      - name: Update npm
+        run: npm install -g npm@latest
+
       - name: Publish 🚀
         uses: SunLxy/npm-publish@main
         with:
