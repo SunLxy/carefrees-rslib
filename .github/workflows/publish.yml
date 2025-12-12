@@ -59,10 +59,7 @@ jobs:
         run: npm install -g npm@latest
 
       - name: Publish 🚀
-        run: npm publish
-
-      # - name: Publish 🚀
-      #   uses: SunLxy/npm-publish@main
-      #   with:
-      #     # token: ${{ secrets.NPM_TOKEN }}
-      #     package: ./package.json
+        uses: SunLxy/npm-publish@main
+        with:
+          # token: ${{ secrets.NPM_TOKEN }}
+          package: ./package.json
