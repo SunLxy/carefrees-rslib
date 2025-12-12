@@ -17,6 +17,10 @@
   "bin": {
     "carefrees-rslib": "./bin/rslib"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SunLxy/carefrees-rslib.git"
+  },
   "publishConfig": {
     "access": "public"
   },
