@@ -1,6 +1,6 @@
 {
   "name": "@carefrees/rslib",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "打包组件库的工具",
   "homepage": "https://github.com/SunLxy/carefrees-rslib",
   "author": "SunLxy <1011771396@qq.com>",
@@ -30,12 +30,13 @@
   },
   "dependencies": {
     "vue-ts": "~1.0.11",
-    "rsbuild-plugin-unplugin-vue": "^0.1.0",
-    "@rsbuild/plugin-react": "^1.3.4",
-    "@rsbuild/plugin-sass": "^1.3.3",
-    "@rslib/core": "^0.11.1",
-    "@rsbuild/plugin-svgr": "^1.2.1",
-    "typescript": "~5.9.2",
-    "@types/node": "~24.1.0"
+    "rsbuild-plugin-unplugin-vue": "~0.1.0",
+    "@rsbuild/plugin-react": "~1.4.2",
+    "@rsbuild/plugin-sass": "~1.4.0",
+    "@rslib/core": "~0.18.4",
+    "@rsbuild/plugin-svgr": "~1.2.3",
+    "typescript": "~5.9.3",
+    "@types/node": "~25.0.1",
+    "@rsbuild/core": "~1.6.14"
   }
 }
